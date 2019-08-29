@@ -11,6 +11,7 @@ import {
 } from 'react-router-dom';
 import Nav from './components/Nav'
 import Main from './components/Index'
+import CourseDetail from './components/CourseDetail'
 import NotFound from './components/NotFound'
 
 
@@ -26,18 +27,18 @@ export default class App extends Component {
 
   componentDidMount() {
     //run this function at initialization
-    this.performSearch();
+    this.apiSearch();
   }
 
   //obtain data using axios 
-  performSearch = (query = 'courses', istrue = false) => {
-    axios.get(`${apiPath}/${query}`)
+  apiSearch = (query = '/courses', istrue = false) => {
+    console.log('queeeryryryryryry', query);
+    axios.get(`${apiPath}${query}`)
     .then(response => {
       this.setState({
         //set data to imgs state
-        res: response
+        data: response.data
       });
-        console.log('respoooooonseeeeee', response);
     })
     .catch(error => {
       //throw an error to console for developer debugging purposes
@@ -53,12 +54,13 @@ export default class App extends Component {
             <div className="header">
               <div className="bounds">
                 <h1 className="header--logo">Courses</h1>
-                <Nav onClick={this.performSearch} />
+                <Nav onClick={this.apiSearch} />
                 <hr/>
               </div>  
             </div>
             <Switch>
-              <Route exact path="/" render={ () => <Main title="Courses" /> } /> 
+              <Route exact path="/" render={ () => <Main title="Main-Page" data={this.state.data} /> } /> 
+              <Route exact path="/course-detail/:id" render={ (props) => <CourseDetail {...props} title="Course-Detail" search={this.apiSearch} data={this.state.data}/> } /> 
               <Route component={NotFound} />
             </Switch>  
           </div> 
@@ -68,27 +70,3 @@ export default class App extends Component {
 
 }
 
-
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
