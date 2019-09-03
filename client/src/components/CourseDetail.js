@@ -4,19 +4,15 @@ import React, { Component } from 'react';
 
 class CourseDetail extends Component {
 
-  apiCall = () => {
-    this.props.search(this.props.match.params.path)
-    console.log('11111111111', this.props);
-  }
-
   render() {
-  console.log('chekiningprropr1111111111111', this.props);
-  console.log('chekiningprroproprorporporrps', this.props.match.params.id);
+  console.log('222222222', this.props.data);
+
+
     return (
       <div>
         <div className="actions--bar">
           <div className="bounds">
-            <div className="grid-100"><span><a className="button" href="update-course.html">Update Course</a><a className="button" href="#">Delete Course</a></span><a
+            <div className="grid-100"><span><a className="button" href={'course-detail/' + 'update-course'}>Update Course</a><a className="button" href="#">Delete Course</a></span><a
                 className="button button-secondary" href="/">Return to List</a></div>
           </div>
         </div>

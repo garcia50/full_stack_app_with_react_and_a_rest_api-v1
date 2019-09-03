@@ -31,9 +31,9 @@ export default class App extends Component {
   }
 
   //obtain data using axios 
-  apiSearch = (query = '/courses', istrue = false) => {
+  apiSearch = (query = 'courses', istrue = false) => {
     console.log('queeeryryryryryry', query);
-    axios.get(`${apiPath}${query}`)
+    axios.get(`${apiPath}/${query}`)
     .then(response => {
       this.setState({
         //set data to imgs state
@@ -60,13 +60,13 @@ export default class App extends Component {
             </div>
             <Switch>
               <Route exact path="/" render={ () => <Main title="Main-Page" data={this.state.data} /> } /> 
-              <Route exact path="/course-detail/:id" render={ (props) => <CourseDetail {...props} title="Course-Detail" search={this.apiSearch} data={this.state.data}/> } /> 
+              <Route exact path="/course-detail/:id/:course" render={ (props) => <CourseDetail {...props} title="Course-Detail" search={this.apiSearch("courses/" + props.match.params.id)} data={this.state.data}/> } /> 
               <Route component={NotFound} />
             </Switch>  
           </div> 
       </BrowserRouter>
     );
   }
+              // <Route exact path="/course-detail/:id/:course" render={ (props) => <CourseDetail {...props} title="Course-Detail" search={this.apiSearch} data={this.state.data}/> } /> 
 
 }
-

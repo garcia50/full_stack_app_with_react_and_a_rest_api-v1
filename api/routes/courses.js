@@ -20,7 +20,6 @@ function asyncHandler(cb) {
 
 /* Retrieves all courses */
 router.get('/', asyncHandler( async (req, res) => {
-  console.log('woooorokrokrokrrk');
   Course.findAll()
   .then(function(courses) {
     res.status(200).json(courses).end()

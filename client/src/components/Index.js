@@ -14,7 +14,6 @@ const Main = (props) => {
       />  
     );
   }
-      console.log('wpeijfbnwefivblweijv', courses);
 
   return (
     <div className="bounds">
