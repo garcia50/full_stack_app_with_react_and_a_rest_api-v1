@@ -1,5 +1,4 @@
-//Flickr's Api key
-import apiPath from './config.js';
+import apiBaseUrl from './config.js';
 //import the libraries needed for this project
 import React, { Component } from 'react';
 // import './App.css';
@@ -9,11 +8,21 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
+
 import Nav from './components/Nav'
 import Main from './components/Index'
+
+import Authenticated from './components/Authenticated'
+import UserSignIn from './components/UserSignIn'
+import UserSignUp from './components/UserSignUp'
+import UserSignOut from './components/UserSignOut'
+import withContext from './Context';
+
 import CourseDetail from './components/CourseDetail'
 import NotFound from './components/NotFound'
 
+
+const UserSignUpWithContext = withContext(UserSignUp);
 
 
 export default class App extends Component {
@@ -32,8 +41,8 @@ export default class App extends Component {
 
   //obtain data using axios 
   apiSearch = (query = 'courses', istrue = false) => {
-    console.log('queeeryryryryryry', query);
-    axios.get(`${apiPath}/${query}`)
+    // console.log('queeeryryryryryry', query);
+    axios.get(`${apiBaseUrl}/${query}`)
     .then(response => {
       this.setState({
         //set data to imgs state
@@ -60,11 +69,16 @@ export default class App extends Component {
             </div>
             <Switch>
               <Route exact path="/" render={ () => <Main title="Main-Page" data={this.state.data} /> } /> 
+              <Route path="/authenticated" component={Authenticated} />
+              <Route path="/signin" component={UserSignIn} />
+              <Route path="/signup" component={UserSignUpWithContext} />
+              <Route path="/signout" component={UserSignOut} />
               <Route exact path="/course-detail/:id/:course" render={ (props) => <CourseDetail {...props} title="Course-Detail" search={this.apiSearch} data={this.state.data}/> } /> 
               <Route component={NotFound} />
             </Switch>  
           </div> 
       </BrowserRouter>
+              // <Route exact path="/" component={Public} />
               // <Route exact path="/course-detail/:id/:course" render={ (props) => <CourseDetail {...props} title="Course-Detail" search={this.apiSearch("courses/" + props.match.params.id)} data={this.state.data}/> } /> 
     );
   }

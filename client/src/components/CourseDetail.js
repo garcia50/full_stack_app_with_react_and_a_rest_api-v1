@@ -1,36 +1,79 @@
-// import React from 'react';
-import React, { Component } from 'react';
+import React from 'react';
+// import React, { Component } from 'react';
 
 
-class CourseDetail extends Component {
-  state = {
-    course: {}
-  }
+// class CourseDetail extends Component {
+const CourseDetail = (props) => {
+
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     title: '',
+  //     course: [],
+  //     user: []
+  //   };
+  //   this.props.search("courses/" + this.props.match.params.id)
+  // }
+
+  // componentDidMount() {
+  //   // this.props.search("courses/" + this.props.match.params.id)
+  //   // this.setState({ course: this.props.data })
+  //   // this.props.search("courses/" + this.props.match.params.id)
+  //   this.makincall()
+  // }
 
 
-  componentDidMount() {
-    // this.setState({ course: this.props.search("courses/" + this.props.match.params.id) })
-    this.props.search("courses/" + this.props.match.params.id)
-    // this.makincall();
-  }
+  // componentDidUpdate() {
+  //   // this.makincall();
+  //   // if (this.props.data.constructor === Object) {
+  //   //   // console.log('yuuuuup', this.props.data);
+  //   //   this.setState({course: this.props.data})
+  //   // }
+  //   // this.makincall()
 
-  makincall() {
-    // if (this.props.data.constructor === Array) {
-    //   console.log('issssss arrayyyyyy');
-    // } else {
-    //   console.log('OOOOObjeeeecttttt');
+  // }
+
+
+  // makincall = () => {
+
+  //   // if (this.props.data.constructor === Array) {
+  //   //   console.log('issssss arrayyyyyy');
+  //   // } else {
+  //   //   console.log('OOOOObjeeeecttttt');
+  //   // }
+
+  //   if (this.props.data.constructor === Object) {
+  //     // console.log('yuuuuup', this.props.data);
+  //     this.setState({course: this.props.data})
+  //   }
+
+  //   // this.props.search("courses/" + this.props.match.params.id)
+  //   // this.setState({ course: this.props.data })
+  //   // this.setState({ title: this.props.data })
+  //   // console.log('heyeyeyeyeyeyye', this.props.data)
+
+  // }
+
+
+  // render() {
+    // this.makincall()
+    // let course = this.state.course;
+    // console.log('coursesesesesesessesz', this.state.course);
+
+    props.search("courses/" + props.match.params.id)
+    console.log('11111111111111', props.data);
+    let course = props.data
+
+    // if (props.data.constructor === Object) {
+    //   // console.log('yuuuuup', this.props.data);
+    //   let course = props.data;
+    //   console.log('couuururururusseee', course);
     // }
 
-    if (this.props.data.constructor === Object) {
-      console.log('yuuuuup',this.props.data);
-      // this.setState({course: this.props.data})
-    }
-  }
+    // props.search("users/")
+    // console.log('userererererereress', props.data);
 
 
-  render() {
-    this.makincall();
-    console.log('coursesesesesesessesz', this.state.course);
 
     return (
       <div>
@@ -44,7 +87,7 @@ class CourseDetail extends Component {
           <div className="grid-66">
             <div className="course--header">
               <h4 className="course--label">Course</h4>
-              <h3 className="course--title">Build a Basic Bookcase</h3>
+              <h3 className="course--title">{}</h3>
               <p>By Joe Smith</p>
             </div>
             <div className="course--description">
@@ -84,7 +127,7 @@ class CourseDetail extends Component {
         </div>
       </div>
     )
-  }
+  // }
 }
 
 export default CourseDetail;
