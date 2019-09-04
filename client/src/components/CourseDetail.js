@@ -3,10 +3,34 @@ import React, { Component } from 'react';
 
 
 class CourseDetail extends Component {
+  state = {
+    course: {}
+  }
+
+
+  componentDidMount() {
+    // this.setState({ course: this.props.search("courses/" + this.props.match.params.id) })
+    this.props.search("courses/" + this.props.match.params.id)
+    // this.makincall();
+  }
+
+  makincall() {
+    // if (this.props.data.constructor === Array) {
+    //   console.log('issssss arrayyyyyy');
+    // } else {
+    //   console.log('OOOOObjeeeecttttt');
+    // }
+
+    if (this.props.data.constructor === Object) {
+      console.log('yuuuuup',this.props.data);
+      // this.setState({course: this.props.data})
+    }
+  }
+
 
   render() {
-  console.log('222222222', this.props.data);
-
+    this.makincall();
+    console.log('coursesesesesesessesz', this.state.course);
 
     return (
       <div>
