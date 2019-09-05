@@ -7,8 +7,8 @@ export default class Nav extends Component {
     return (
       //create nav element and append NavLink's
       <nav>
-        <NavLink to="/sign-up.html">Sign Up</NavLink>
-        <NavLink to="/sign-in.html">Sign In</NavLink>
+        <NavLink to="/signup">Sign Up</NavLink>
+        <NavLink to="/signin">Sign In</NavLink>
       </nav>
     )
   }

@@ -16,7 +16,7 @@ export default class UserSignUp extends Component {
     const {
       firstName,
       lastName,
-      email_address,
+      emailAddress,
       password,
       confirmPassword,
       errors,
@@ -34,15 +34,12 @@ export default class UserSignUp extends Component {
               submitButtonText="Sign Up"
               elements={() => (
                 <React.Fragment>
-                  <div><input id="firstName" name="firstName" type="text" value="firstName" onChange={this.change} placeholder="First Name" /></div>
-                  <div><input id="lastName" name="lastName" type="text" value="lastName" onChange={this.change} placeholder="Last Name" /></div>
-                  <div><input id="emailAddress" name="emailAddress" type="text" value="emailAddress" onChange={this.change} placeholder="First Name" /></div>
-                  <div><input id="password" name="password" type="text" value="password" onChange={this.change} placeholder="First Name" /></div>
-                  <div><input id="confirmPassword" name="confirmPassword" type="text" value="confirmPassword" onChange={this.change} placeholder="First Name" /></div>
-                  <div class="grid-100 pad-bottom">
-                    <button class="button" type="submit" submit={this.submit}>Sign Up</button>
-                    <button class="button button-secondary" onclick="{event.preventDefault(); location.href='/';}" cancel={this.cancel}>Cancel</button>
-                  </div>
+                  <div><input id="firstName" name="firstName" type="text" value={firstName} onChange={this.change} placeholder="First Name" /></div>
+                  <div><input id="lastName" name="lastName" type="text" value={lastName} onChange={this.change} placeholder="Last Name" /></div>
+                  <div><input id="emailAddress" name="emailAddress" type="text" value={emailAddress} onChange={this.change} placeholder="Email Address" /></div>
+                  <div><input id="password" name="password" type="text" value={password} onChange={this.change} placeholder="Password" /></div>
+                  <div><input id="confirmPassword" name="confirmPassword" type="text" value={confirmPassword} onChange={this.change} placeholder="Confirm Password" /></div>
+                  
                 </React.Fragment>
               )} />
             </div>
@@ -87,7 +84,7 @@ export default class UserSignUp extends Component {
         if (errors.length) {
           this.setState({ errors });
         } else {
-          context.actions.signIn(username, password)
+          context.actions.signIn(emailAddress, password)
             .then(() => {
               this.props.history.push('/authenticated');    
             });
