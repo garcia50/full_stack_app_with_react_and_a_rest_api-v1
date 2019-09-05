@@ -74,8 +74,7 @@ export default class UserSignUp extends Component {
       firstName,
       lastName,
       emailAddress,
-      password,
-      confirmPassword
+      password
     };
 
     context.data.createUser(user)
