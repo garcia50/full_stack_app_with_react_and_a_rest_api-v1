@@ -9,17 +9,19 @@ export default class UserSignUp extends Component {
     emailAddress: '',
     password: '',
     confirmPassword: '',
-    errors: [],
+    errors: []
   }
 
   render() {
+    // console.log('1111', props);
+    console.log('2222', this.props);
     const {
       firstName,
       lastName,
       emailAddress,
       password,
       confirmPassword,
-      errors,
+      errors
     } = this.state;
 
     return (
@@ -66,7 +68,7 @@ export default class UserSignUp extends Component {
       lastName,
       emailAddress,
       password,
-      confirmPassword,
+      confirmPassword
     } = this.state;
 
     // Create user
@@ -75,7 +77,7 @@ export default class UserSignUp extends Component {
       lastName,
       emailAddress,
       password,
-      confirmPassword,
+      confirmPassword
     };
 
     context.data.createUser(user)
