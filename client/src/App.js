@@ -12,19 +12,20 @@ import {
 import Header from './components/Header';
 import Main from './components/Index'
 
+import withContext from './Context';
+import PrivateRoute from './PrivateRoute';
 import Authenticated from './components/Authenticated'
 import UserSignIn from './components/UserSignIn'
 import UserSignUp from './components/UserSignUp'
 import UserSignOut from './components/UserSignOut'
-import withContext from './Context';
-
 import CourseDetail from './components/CourseDetail'
 import NotFound from './components/NotFound'
 
 const HeaderWithContext = withContext(Header);
-const UserSignUpWithContext = withContext(UserSignUp);
 const AuthWithContext = withContext(Authenticated);
+const UserSignUpWithContext = withContext(UserSignUp);
 const UserSignInWithContext = withContext(UserSignIn);
+const UserSignOutWithContext = withContext(UserSignOut);
 
 
 export default class App extends Component {
@@ -66,10 +67,10 @@ export default class App extends Component {
             
             <Switch>
               <Route exact path="/" render={ () => <Main title="Main-Page" search={this.apiSearch()} data={this.state.data} /> } /> 
-              <Route path="/authenticated" component={AuthWithContext} />
+              <PrivateRoute path="/authenticated" component={AuthWithContext} />
               <Route path="/signin" component={UserSignInWithContext} />
               <Route path="/signup" component={UserSignUpWithContext} />
-              <Route path="/signout" component={UserSignOut} />
+              <Route path="/signout" component={UserSignOutWithContext} />
               <Route exact path="/course-detail/:id/:course" render={ (props) => <CourseDetail {...props} title="Course-Detail" search={this.apiSearch} data={this.state.data}/> } /> 
               <Route component={NotFound} />
             </Switch>  
