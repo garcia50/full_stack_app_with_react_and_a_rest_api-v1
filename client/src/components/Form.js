@@ -33,11 +33,6 @@ export default (props) => {
   );
 }
 
-//  <div className="grid-100 pad-bottom">
-//   <button className="button" type="submit" submit={this.submit}>Sign Up</button>
-//   <button className="button button-secondary" onclick="{event.preventDefault(); location.href='/';}" cancel={this.cancel}>Cancel</button>
-// </div>
-
 function ErrorsDisplay({ errors }) {
   let errorsDisplay = null;
 

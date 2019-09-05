@@ -13,8 +13,6 @@ export default class UserSignUp extends Component {
   }
 
   render() {
-    // console.log('1111', props);
-    console.log('2222', this.props);
     const {
       firstName,
       lastName,
