@@ -73,7 +73,7 @@ export default class App extends Component {
               <Route path="/signin" component={UserSignInWithContext} />
               <Route path="/signup" component={UserSignUpWithContext} />
               <Route path="/signout" component={UserSignOutWithContext} />
-              <Route path="/courses/create" component={CreateCourse} />
+              <PrivateRoute path="/courses/create" component={CreateCourseWithContext} />
               <Route exact path="/course-detail/:id/:course" render={ (props) => <CourseDetail {...props} title="Course-Detail" search={this.apiSearch} data={this.state.data}/> } /> 
               <Route component={NotFound} />
             </Switch>  
