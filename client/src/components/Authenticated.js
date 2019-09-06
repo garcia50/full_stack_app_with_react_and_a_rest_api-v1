@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default ({ context  }) => {
-  console.log('connonononononon', context);
   const authUser = context.authenticatedUser;
   return (
   <div className="bounds">

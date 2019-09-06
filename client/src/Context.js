@@ -5,7 +5,6 @@ import Data from './Data';
 const Context = React.createContext(); 
 
 export class Provider extends Component {
-
   state = {
     authenticatedUser: Cookies.getJSON('authenticatedUser') || null
   };
@@ -31,7 +30,6 @@ export class Provider extends Component {
       </Context.Provider>  
     );
   }
-
   
   signIn = async (emailAddress, password) => {
     const user = await this.data.getUser(emailAddress, password);

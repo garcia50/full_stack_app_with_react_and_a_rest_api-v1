@@ -19,7 +19,7 @@ const Main = (props) => {
     <div className="bounds">
       {courses}
       <div className="grid-33">
-        <a className="course--module course--add--module" href="create-course">
+        <a className="course--module course--add--module" href="courses/create">
           <h3 className="course--add--title"><svg 
               version="1.1" 
               xmlns="http://www.w3.org/2000/svg" 

@@ -1,17 +1,16 @@
 import apiBaseUrl from './config.js';
 //import the libraries needed for this project
 import React, { Component } from 'react';
-// import './App.css';
 import axios from 'axios';
 import {
   BrowserRouter,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
 
 import Header from './components/Header';
 import Main from './components/Index'
-
 import withContext from './Context';
 import PrivateRoute from './PrivateRoute';
 import Authenticated from './components/Authenticated'
@@ -19,6 +18,7 @@ import UserSignIn from './components/UserSignIn'
 import UserSignUp from './components/UserSignUp'
 import UserSignOut from './components/UserSignOut'
 import CourseDetail from './components/CourseDetail'
+import CreateCourse from './components/CreateCourse'
 import NotFound from './components/NotFound'
 
 const HeaderWithContext = withContext(Header);
@@ -26,6 +26,7 @@ const AuthWithContext = withContext(Authenticated);
 const UserSignUpWithContext = withContext(UserSignUp);
 const UserSignInWithContext = withContext(UserSignIn);
 const UserSignOutWithContext = withContext(UserSignOut);
+const CreateCourseWithContext = withContext(CreateCourse);
 
 
 export default class App extends Component {
@@ -66,11 +67,13 @@ export default class App extends Component {
           <HeaderWithContext />
             
             <Switch>
-              <Route exact path="/" render={ () => <Main title="Main-Page" search={this.apiSearch()} data={this.state.data} /> } /> 
+              <Redirect exact from="/" to='/courses' />
+              <Route exact path="/courses" render={ () => <Main title="Main-Page" search={this.apiSearch()} data={this.state.data} /> } /> 
               <PrivateRoute path="/authenticated" component={AuthWithContext} />
               <Route path="/signin" component={UserSignInWithContext} />
               <Route path="/signup" component={UserSignUpWithContext} />
               <Route path="/signout" component={UserSignOutWithContext} />
+              <Route path="/courses/create" component={CreateCourse} />
               <Route exact path="/course-detail/:id/:course" render={ (props) => <CourseDetail {...props} title="Course-Detail" search={this.apiSearch} data={this.state.data}/> } /> 
               <Route component={NotFound} />
             </Switch>  
