@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Form from './Form';
+import PasswordMask from 'react-password-mask';
 
 export default class UserSignUp extends Component {
   state = {
@@ -37,8 +38,8 @@ export default class UserSignUp extends Component {
                   <div><input id="firstName" name="firstName" type="text" value={firstName} onChange={this.change} placeholder="First Name" /></div>
                   <div><input id="lastName" name="lastName" type="text" value={lastName} onChange={this.change} placeholder="Last Name" /></div>
                   <div><input id="emailAddress" name="emailAddress" type="text" value={emailAddress} onChange={this.change} placeholder="Email Address" /></div>
-                  <div><input id="password" name="password" type="text" value={password} onChange={this.change} placeholder="Password" /></div>
-                  <div><input id="confirmPassword" name="confirmPassword" type="text" value={confirmPassword} onChange={this.change} placeholder="Confirm Password" /></div>
+                  <div><PasswordMask id="password" name="password" type="text" value={password} onChange={this.change} placeholder="Password" /></div>
+                  <div><PasswordMask id="confirmPassword" name="confirmPassword" type="text" value={confirmPassword} onChange={this.change} placeholder="Confirm Password" /></div>
                 </React.Fragment>
               )} 
             />
