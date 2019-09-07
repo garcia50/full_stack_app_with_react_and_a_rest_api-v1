@@ -84,14 +84,14 @@ export default class UserSignUp extends Component {
         firstName,
         lastName,
         emailAddress,
-        password
+        password,
+        confirmPassword
       };
     }
 
 
     context.data.createUser(user)
     .then( errors => {
-      console.log('erorororororororo', errors);
       if (errors.length) {
         this.setState({ errors });
       } else {

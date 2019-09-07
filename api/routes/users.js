@@ -33,26 +33,39 @@ router.get('/', authenticateUser,
 
 /* Creates user */
 router.post('/', [
-  //Ensure name, email and password are present in request
-  check('firstName')
-    .exists({ checkNull: true, checkFalsy: true })
-    .withMessage('Please provide your "First Name"'),
-  check('lastName')
-    .exists({ checkNull: true, checkFalsy: true })
-    .withMessage('Please provide your "Last Name"'),
-  check('emailAddress')
-    .exists({ checkNull: true, checkFalsy: true })
-    // .isEmail()
-    .withMessage('Please provide your "Email Address"'),
-  check('password')
-    .exists({ checkNull: true, checkFalsy: true })
-    .withMessage('Please provide a "Password"')
+    //Ensure name, email and password are present in request
+    check('firstName')
+      .exists({ checkNull: true, checkFalsy: true })
+      .withMessage('Please provide your "First Name"'),
+
+    check('lastName')
+      .exists({ checkNull: true, checkFalsy: true })
+      .withMessage('Please provide your "Last Name"'),
+
+    check('emailAddress')
+      .exists({ checkNull: true, checkFalsy: true })
+      .withMessage('Please provide your "Email Address"')
+      .isEmail()
+      //Credit for this custom validator comes from:
+      //https://express-validator.github.io/docs/custom-error-messages.html
+      // &
+      //https://github.com/express-validator/express-validator/issues/619
+      .custom(async (value, {req}) => {
+        const existingEmail = await User.findAll({where: {emailAddress: value }});
+        if(existingEmail.length !== 0) {
+          throw new Error('That email address is already in use.');
+        }
+        return true;
+      }),
+
+    check('password')
+      .exists({ checkNull: true, checkFalsy: true })
+      .withMessage('Please provide a "Password"')
   ], 
 
   asyncHandler( async (req, res) => {
     // Attempt to get the validation result from the Request object.
     const errors = validationResult(req);
-    console.log('poipoipoipoipoipoipoipoi', errors);
     // If there are validation errors...
     if (!errors.isEmpty()) {
       // Use the Array `map()` method to get a list of error messages.

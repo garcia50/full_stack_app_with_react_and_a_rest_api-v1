@@ -42,11 +42,7 @@ export default class Data {
     }
     else if (response.status === 400) {
       return response.json().then(data => {
-        console.log('1111111111111',data);
-        // let errors = []
-        // errors.push(data.message)
         return data.errors;
-        // return [data.message]
       });
     }
     else {
