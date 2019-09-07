@@ -23,7 +23,7 @@ export default class Data {
   }
 
   async getUser(emailAddress, password) {
-    const response = await this.api(`/users`, 'GET', null, true, { emailAddress, password });
+    const response = await this.api('/users', 'GET', null, true, { emailAddress, password });
     if (response.status === 200) {
       return response.json().then(data => data);
     }
@@ -37,6 +37,25 @@ export default class Data {
   
   async createUser(user) {
     const response = await this.api('/users', 'POST', user);
+    if (response.status === 201) {
+      return [];
+    }
+    else if (response.status === 400) {
+      return response.json().then(data => {
+        console.log('1111111111111',data);
+        // let errors = []
+        // errors.push(data.message)
+        return data.errors;
+        // return [data.message]
+      });
+    }
+    else {
+      throw new Error();
+    }
+  }
+
+  async createCourse(course, emailAddress, password) {
+    const response = await this.api('/courses', 'POST', course, true, { emailAddress, password });
     if (response.status === 201) {
       return [];
     }

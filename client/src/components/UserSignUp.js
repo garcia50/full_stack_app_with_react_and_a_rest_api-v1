@@ -40,8 +40,9 @@ export default class UserSignUp extends Component {
                   <div><input id="password" name="password" type="text" value={password} onChange={this.change} placeholder="Password" /></div>
                   <div><input id="confirmPassword" name="confirmPassword" type="text" value={confirmPassword} onChange={this.change} placeholder="Confirm Password" /></div>
                 </React.Fragment>
-              )} />
-            </div>
+              )} 
+            />
+          </div>
           <p>Already have a user account? <Link to="/signin">Click here</Link> to sign in!</p>
         </div>
       </div>
@@ -66,36 +67,47 @@ export default class UserSignUp extends Component {
       lastName,
       emailAddress,
       password,
-      confirmPassword
+      confirmPassword,
+      errors
     } = this.state;
 
-    // Create user
-    const user = {
-      firstName,
-      lastName,
-      emailAddress,
-      password
-    };
+    let user = {};
+
+    if (password !== confirmPassword) {
+      this.setState({
+        errors: ["passwords do not match"]
+      })
+      return;
+    } else {
+      // Create user
+      user = {
+        firstName,
+        lastName,
+        emailAddress,
+        password
+      };
+    }
+
 
     context.data.createUser(user)
-      .then( errors => {
-        if (errors.length) {
-          this.setState({ errors });
-        } else {
-          context.actions.signIn(emailAddress, password)
-            .then(() => {
-              this.props.history.push('/authenticated');    
-            });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        this.props.history.push('/error');
-      });
-  
+    .then( errors => {
+      console.log('erorororororororo', errors);
+      if (errors.length) {
+        this.setState({ errors });
+      } else {
+        context.actions.signIn(emailAddress, password)
+        .then(() => {
+          this.props.history.push('/authenticated');    
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      this.props.history.push('/error');
+    });
   }
 
   cancel = () => {
-   this.props.history.push('/');
+    this.props.history.push('/');
   }
 }
