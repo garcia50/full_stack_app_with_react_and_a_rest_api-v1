@@ -6,7 +6,8 @@ const Context = React.createContext();
 
 export class Provider extends Component {
   state = {
-    authenticatedUser: Cookies.getJSON('authenticatedUser') || null
+    authenticatedUser: Cookies.getJSON('authenticatedUser') || null,
+    authUser: Cookies.getJSON('authUser') || null
   };
 
   constructor() {
@@ -16,13 +17,15 @@ export class Provider extends Component {
 
   render() {
     const { authenticatedUser } = this.state;
+    const { authUser } = this.state;
     const value = {
       authenticatedUser,
+      authUser,
       data: this.data,
       actions: {
         signIn: this.signIn,
         signOut: this.signOut
-      },
+      }
     };
     return (
       <Context.Provider value={value}>
@@ -32,24 +35,34 @@ export class Provider extends Component {
   }
   
   signIn = async (emailAddress, password) => {
-    const user = await this.data.getUser(emailAddress, password);
+    const encodedCredentials = btoa(`${emailAddress}:${password}`);
+
+    this.setState({authUser: encodedCredentials})
+
+    const user = await this.data.getUser(encodedCredentials);
+    console.log('userrrrrrrrrrrr', user);
+    console.log('111111111', this.state.authenticatedUser);
+    console.log('222222222', this.state.authUser);
     if (user !== null) {
       this.setState(() => {
         return {
           authenticatedUser: user,
+          authUser: encodedCredentials
         };
       });
       const cookieOptions = {
         expires: 1 // 1 day
       };
       Cookies.set('authenticatedUser', JSON.stringify(user), cookieOptions);
+      Cookies.set('authUser', JSON.stringify(encodedCredentials), cookieOptions);
     }
     return user;
   }
 
   signOut = () => {
-    this.setState({ authenticatedUser: null });
+    this.setState({ authenticatedUser: null, authUser: null });
     Cookies.remove('authenticatedUser');
+    Cookies.remove('authUser');
   }
 }
 

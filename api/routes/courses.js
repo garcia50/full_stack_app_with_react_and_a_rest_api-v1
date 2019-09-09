@@ -43,10 +43,10 @@ router.get('/:id', asyncHandler( async (req, res) => {
 router.post('/', authenticateUser, [
   //Ensure title and decription is present in request
   check('title')
-    .exists()
+    .exists({ checkNull: true, checkFalsy: true })
     .withMessage('Please provide a value for "Title"'),
   check('description')
-    .exists()
+    .exists({ checkNull: true, checkFalsy: true })
     .withMessage('Please provide a value for "Description"')
   ],
   asyncHandler( async (req, res) => {

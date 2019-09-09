@@ -24,7 +24,7 @@ const bcryptjs = require('bcryptjs');
         .compareSync(credentials.pass, user.password);
         // If the passwords match...
         if (authenticated) {
-          console.log(`Authentication successful for username: ${user.firstName} ${user.lastName}`);
+          console.log(`Authentication successful for username: ${user.firstName}${user.lastName}`);
           // Then store the retrieved user object on the request object
           // so any middleware functions that follow this middleware function
           // will have access to the user's information.

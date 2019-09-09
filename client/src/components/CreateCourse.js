@@ -80,8 +80,13 @@ export default class CreateCourse extends Component {
 
   submit = () => {
     const { context } = this.props;
-    const authUser = context.authenticatedUser;
-    console.log('authuserrrrrrrrrrrr', authUser)
+    const userId = context.authenticatedUser.userId;
+    const credentials = context.authUser;
+    // const emailAddress = context.authenticatedUser.emailAddress;
+    // const password = context.authenticatedUser.password;
+    console.log('contextxtxtxtxtxtxtxtxt', context)
+    console.log('userIdr11111111111', context.authenticatedUser)
+    console.log('userIdrrrrrrrrrrr', userId)
 
     const {
       title,
@@ -92,13 +97,14 @@ export default class CreateCourse extends Component {
 
     // Create course
     const course = {
+      userId,
       title,
       description,
       estimatedTime,
       materialsNeeded
     };
 
-    context.data.createCourse(course)
+    context.data.createCourse(course, credentials)
     .then( errors => {
       if (errors.length) {
         this.setState({ errors });

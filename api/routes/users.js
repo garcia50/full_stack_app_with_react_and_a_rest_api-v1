@@ -26,7 +26,8 @@ router.get('/', authenticateUser,
       userId: user.id,
       firstName: user.firstName,
       lastName: user.lastName,
-      emailAddress: user.emailAddress
+      emailAddress: user.emailAddress,
+      password: user.password
     });
   })
 );
@@ -37,11 +38,9 @@ router.post('/', [
     check('firstName')
       .exists({ checkNull: true, checkFalsy: true })
       .withMessage('Please provide your "First Name"'),
-
     check('lastName')
       .exists({ checkNull: true, checkFalsy: true })
       .withMessage('Please provide your "Last Name"'),
-
     check('emailAddress')
       .exists({ checkNull: true, checkFalsy: true })
       .withMessage('Please provide your "Email Address"')
@@ -57,7 +56,6 @@ router.post('/', [
         }
         return true;
       }),
-
     check('password')
       .exists({ checkNull: true, checkFalsy: true })
       .withMessage('Please provide a "Password"')
