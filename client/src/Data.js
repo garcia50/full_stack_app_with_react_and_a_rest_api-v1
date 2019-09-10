@@ -16,7 +16,6 @@ export default class Data {
     }
 
     if (requiresAuth) {    
-      // const encodedCredentials = btoa(`${credentials.emailAddress}:${credentials.password}`);
       options.headers['Authorization'] = `Basic ${credentials}`;
     }
     return fetch(url, options);

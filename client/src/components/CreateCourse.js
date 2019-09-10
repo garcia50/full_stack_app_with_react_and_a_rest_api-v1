@@ -10,7 +10,6 @@ export default class CreateCourse extends Component {
     errors: []
   }
 
-
   render() {
     const { context } = this.props;
     const authUser = context.authenticatedUser;
@@ -82,11 +81,6 @@ export default class CreateCourse extends Component {
     const { context } = this.props;
     const userId = context.authenticatedUser.userId;
     const credentials = context.authUser;
-    // const emailAddress = context.authenticatedUser.emailAddress;
-    // const password = context.authenticatedUser.password;
-    console.log('contextxtxtxtxtxtxtxtxt', context)
-    console.log('userIdr11111111111', context.authenticatedUser)
-    console.log('userIdrrrrrrrrrrr', userId)
 
     const {
       title,

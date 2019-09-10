@@ -36,13 +36,9 @@ export class Provider extends Component {
   
   signIn = async (emailAddress, password) => {
     const encodedCredentials = btoa(`${emailAddress}:${password}`);
-
     this.setState({authUser: encodedCredentials})
 
     const user = await this.data.getUser(encodedCredentials);
-    console.log('userrrrrrrrrrrr', user);
-    console.log('111111111', this.state.authenticatedUser);
-    console.log('222222222', this.state.authUser);
     if (user !== null) {
       this.setState(() => {
         return {
@@ -83,4 +79,3 @@ export default function withContext(Component) {
     );
   }
 }
-

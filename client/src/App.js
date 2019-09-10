@@ -68,7 +68,7 @@ export default class App extends Component {
             
             <Switch>
               <Redirect exact from="/" to='/courses' />
-              <Route exact path="/courses" render={ () => <Main title="Main-Page" search={this.apiSearch()} data={this.state.data} /> } /> 
+              <Route exact path="/courses" render={ () => <Main title="Main-Page" search={this.apiSearch} data={this.state.data} /> } /> 
               <PrivateRoute path="/authenticated" component={AuthWithContext} />
               <Route path="/signin" component={UserSignInWithContext} />
               <Route path="/signup" component={UserSignUpWithContext} />

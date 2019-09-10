@@ -106,7 +106,6 @@ router.put('/:id', authenticateUser, [
   })
 );
 
-
 /* Delete course */
 router.delete('/:id', authenticateUser, 
   asyncHandler( async (req, res) => {

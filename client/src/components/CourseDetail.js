@@ -1,58 +1,26 @@
 import React from 'react';
 // import React, { Component } from 'react';
 
-
 // class CourseDetail extends Component {
 const CourseDetail = (props) => {
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     title: '',
-  //     course: [],
-  //     user: []
-  //   };
-  //   this.props.search("courses/" + this.props.match.params.id)
-  // }
-
-  // componentDidMount() {
-  //   // this.props.search("courses/" + this.props.match.params.id)
-  //   // this.setState({ course: this.props.data })
-  //   // this.props.search("courses/" + this.props.match.params.id)
-  //   this.makincall()
-  // }
+ 
 
 
-  // componentDidUpdate() {
-  //   // this.makincall();
-  //   // if (this.props.data.constructor === Object) {
-  //   //   // console.log('yuuuuup', this.props.data);
-  //   //   this.setState({course: this.props.data})
-  //   // }
-  //   // this.makincall()
+  const makincall = () => {
+    const apiCall = props.search
+    
+    apiCall("courses/" + props.match.params.id)
+    let course = props.data
 
-  // }
+    apiCall("users/" + props.data.userId)
+    let user = props.data
+
+    console.log('courrrrrrrrrrrrrrse', course);
+    console.log('userserserserserser', user);
+  }
 
 
-  // makincall = () => {
-
-  //   // if (this.props.data.constructor === Array) {
-  //   //   console.log('issssss arrayyyyyy');
-  //   // } else {
-  //   //   console.log('OOOOObjeeeecttttt');
-  //   // }
-
-  //   if (this.props.data.constructor === Object) {
-  //     // console.log('yuuuuup', this.props.data);
-  //     this.setState({course: this.props.data})
-  //   }
-
-  //   // this.props.search("courses/" + this.props.match.params.id)
-  //   // this.setState({ course: this.props.data })
-  //   // this.setState({ title: this.props.data })
-  //   // console.log('heyeyeyeyeyeyye', this.props.data)
-
-  // }
 
 
   // render() {
@@ -60,9 +28,11 @@ const CourseDetail = (props) => {
     // let course = this.state.course;
     // console.log('coursesesesesesessesz', this.state.course);
 
-    props.search("courses/" + props.match.params.id)
-    console.log('11111111111111', props.data);
-    let course = props.data
+    // props.search("courses/" + props.match.params.id)
+    console.log('11111111111111', props);
+
+
+    // let course = props.data
 
     // if (props.data.constructor === Object) {
     //   // console.log('yuuuuup', this.props.data);
@@ -78,7 +48,7 @@ const CourseDetail = (props) => {
     return (
       <div>
         <div className="actions--bar">
-          <div className="bounds">
+          <div className="bounds" onLoad={makincall()}>
             <div className="grid-100"><span><a className="button" href={'course-detail/' + 'update-course'}>Update Course</a><a className="button" href="#">Delete Course</a></span><a
                 className="button button-secondary" href="/">Return to List</a></div>
           </div>
