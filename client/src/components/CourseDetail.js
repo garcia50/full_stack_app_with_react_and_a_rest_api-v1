@@ -20,9 +20,10 @@ export default class CourseDetail extends Component {
 
   componentWillUpdate() {
     try {
-      this.userName();
-      this.materialsNeeded();
+      this.userCourseInfo();
+      // this.materialsNeeded();
     } catch (err) {
+      // throw Error(err)
       // console.log('errrrrrrrr', err);
     }
   }
@@ -42,17 +43,14 @@ export default class CourseDetail extends Component {
   }
 
 
-  userName = (course = this.state.course) => {
+  userCourseInfo = (course = this.state.course) => {
     if (course.User !== undefined) {
       let user = `${course.User.firstName} ${course.User.lastName}`         
       this.setState({
         fullName: user
       })
     }
-  }
 
-
-  materialsNeeded = (course = this.state.course) => {
     if (course.materialsNeeded !== undefined) {
       let list = course.materialsNeeded
                   .split('\n')
@@ -60,12 +58,12 @@ export default class CourseDetail extends Component {
                     // `<li key=${i}>${item}</li>`
                   React.createElement('li', {key: i}, item.replace('*', '')),
                  )
-
       this.setState({
         materials: list
       })
     }
   }
+
 
   render() {
 
@@ -82,7 +80,7 @@ export default class CourseDetail extends Component {
               </div>
           </div>
         </div>
-        <div className="bounds course--detail" >
+        <div className="bounds course--detail">
           <div className="grid-66">
             <div className="course--header">
               <h4 className="course--label">Course</h4>
