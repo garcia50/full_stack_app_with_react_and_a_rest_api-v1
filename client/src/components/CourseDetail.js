@@ -1,72 +1,68 @@
-import React from 'react';
-// import React, { Component } from 'react';
+// import React from 'react';
+import apiBaseUrl from '../config.js';
+import axios from 'axios';
 
-// class CourseDetail extends Component {
-const CourseDetail = (props) => {
 
+import React, { Component } from 'react';
+
+export default class CourseDetail extends Component {
+// const CourseDetail = (props) => {
  
-
-
-  const makincall = () => {
-    const apiCall = props.search
-    
-    apiCall("courses/" + props.match.params.id)
-    let course = props.data
-
-    apiCall("users/" + props.data.userId)
-    let user = props.data
-
-    console.log('courrrrrrrrrrrrrrse', course);
-    console.log('userserserserserser', user);
+  // let course;
+  constructor() {
+    super();
+    this.state = {
+      course: []
+    };
   }
 
+  componentDidMount() {
+    //run this function at initialization
+    this.apiSearch("courses/" + this.props.match.params.id);
+  }
+
+  apiSearch = (query = 'courses') => {
+    // console.log('queeeryryryryryry', query);
+    axios.get(`${apiBaseUrl}/${query}`)
+    .then(response => {
+      //set data to imgs state
+      this.setState({
+        course: response.data
+      });
+    })
+    .catch(error => {
+      //throw an error to console for developer debugging purposes
+      console.log('Error fetching and parsing data', error);
+    });
+  }
+
+  // console.log('proporporporporrpp', course);
 
 
-
-  // render() {
-    // this.makincall()
-    // let course = this.state.course;
-    // console.log('coursesesesesesessesz', this.state.course);
-
-    // props.search("courses/" + props.match.params.id)
-    console.log('11111111111111', props);
-
-
-    // let course = props.data
-
-    // if (props.data.constructor === Object) {
-    //   // console.log('yuuuuup', this.props.data);
-    //   let course = props.data;
-    //   console.log('couuururururusseee', course);
-    // }
-
-    // props.search("users/")
-    // console.log('userererererereress', props.data);
-
-
-
+  render() {
+    console.log("yayayayayayyaya", this.state.course);
     return (
       <div>
         <div className="actions--bar">
-          <div className="bounds" onLoad={makincall()}>
-            <div className="grid-100"><span><a className="button" href={'course-detail/' + 'update-course'}>Update Course</a><a className="button" href="#">Delete Course</a></span><a
-                className="button button-secondary" href="/">Return to List</a></div>
+          <div className="bounds" >
+            <div className="grid-100">
+              <span>
+                <a className="button" href={'course-detail/' + 'update-course'}>Update Course</a>
+                <a className="button" href="#">Delete Course</a>
+              </span>
+              <a className="button button-secondary" href="/">Return to List</a>
+              </div>
           </div>
         </div>
-        <div className="bounds course--detail">
+        <div className="bounds course--detail" >
           <div className="grid-66">
             <div className="course--header">
               <h4 className="course--label">Course</h4>
-              <h3 className="course--title">{}</h3>
+              <h3 className="course--title">{this.state.course.title}</h3>
               <p>By Joe Smith</p>
             </div>
             <div className="course--description">
-              <p>High-end furniture projects are great to dream about. But unless you have a well-equipped shop and some serious woodworking experience to draw on, it can be difficult to turn the dream into a reality.</p>
-              <p>Not every piece of furniture needs to be a museum showpiece, though. Often a simple design does the job just as well and the experience gained in completing it goes a long way toward making the next project even better.</p>
-              <p>Our pine bookcase, for example, features simple construction and it's designed to be built with basic woodworking tools. Yet, the finished project is a worthy and useful addition to any room of the house. While it's meant to rest on the floor, you can convert the bookcase to a wall-mounted storage unit by leaving off the baseboard. You can secure the cabinet to the wall by screwing through the cabinet cleats into the wall studs.</p>
-              <p>We made the case out of materials available at most building-supply dealers and lumberyards, including 1/2 x 3/4-in. parting strip, 1 x 2, 1 x 4 and 1 x 10 common pine and 1/4-in.-thick lauan plywood. Assembly is quick and easy with glue and nails, and when you're done with construction you have the option of a painted or clear finish.</p>
-              <p>As for basic tools, you'll need a portable circular saw, hammer, block plane, combination square, tape measure, metal rule, two clamps, nail set and putty knife. Other supplies include glue, nails, sandpaper, wood filler and varnish or paint and shellac.</p>
-              <p>The specifications that follow will produce a bookcase with overall dimensions of 10 3/4 in. deep x 34 in. wide x 48 in. tall. While the depth of the case is directly tied to the 1 x 10 stock, you can vary the height, width and shelf spacing to suit your needs. Keep in mind, though, that extending the width of the cabinet may require the addition of central shelf supports.</p>
+              {this.state.course.description}
             </div>
           </div>
           <div className="grid-25 grid-right">
@@ -74,7 +70,7 @@ const CourseDetail = (props) => {
               <ul className="course--stats--list">
                 <li className="course--stats--list--item">
                   <h4>Estimated Time</h4>
-                  <h3>14 hours</h3>
+                  <h3>{this.state.course.estimatedTime}</h3>
                 </li>
                 <li className="course--stats--list--item">
                   <h4>Materials Needed</h4>
@@ -95,9 +91,12 @@ const CourseDetail = (props) => {
             </div>
           </div>
         </div>
+        
       </div>
     )
-  // }
+  }
 }
 
-export default CourseDetail;
+// export default CourseDetail;
+
+

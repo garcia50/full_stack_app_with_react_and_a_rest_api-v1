@@ -2,7 +2,7 @@
 import React from 'react';
 var slugify = require('slugify')
 
-const Courses = ({ id, title }) => {
+const Courses = ({ id, title, testit }) => {
   //create li element and use parameters to access info
   return (
     <div className="grid-33" key={id}>
