@@ -68,8 +68,7 @@ export default class UserSignUp extends Component {
       lastName,
       emailAddress,
       password,
-      confirmPassword,
-      errors
+      confirmPassword
     } = this.state;
 
     let user = {};

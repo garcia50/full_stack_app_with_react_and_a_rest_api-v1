@@ -3,7 +3,7 @@
 const express = require('express');
 const router  = express.Router();
 const { check, validationResult } = require('express-validator');
-const { Course } = require('../db/models');
+const { Course, User } = require('../db/models');
 const authenticateUser = require('./authenticate');
 const { sequelize } = require('../db/models');
 
@@ -29,7 +29,12 @@ router.get('/', asyncHandler( async (req, res) => {
 /* Retrieves a course */
 router.get('/:id', asyncHandler( async (req, res) => {
   const { id } = req.params;
-  Course.findByPk(id)
+  Course.findByPk(id, {
+    include: [{// Notice `include` takes an ARRAY
+      model: User,
+      attributes: ['firstName', 'lastName']
+    }]
+  })
   .then(function(course){
     if(course == null) {
       return res.status(400).json({ errors: 'That course does not exist' });

@@ -7,7 +7,9 @@ export default class CourseDetail extends Component {
   constructor() {
     super();
     this.state = {
-      course: []
+      course: [],
+      materials: null,
+      fullName: ''
     };
   }
 
@@ -16,8 +18,16 @@ export default class CourseDetail extends Component {
     this.apiSearch("courses/" + this.props.match.params.id);
   }
 
+  componentWillUpdate() {
+    try {
+      this.userName();
+      this.materialsNeeded();
+    } catch (err) {
+      // console.log('errrrrrrrr', err);
+    }
+  }
+
   apiSearch = (query = 'courses') => {
-    // console.log('queeeryryryryryry', query);
     axios.get(`${apiBaseUrl}/${query}`)
     .then(response => {
       //set data to imgs state
@@ -32,15 +42,40 @@ export default class CourseDetail extends Component {
   }
 
 
+  userName = (course = this.state.course) => {
+    if (course.User !== undefined) {
+      let user = `${course.User.firstName} ${course.User.lastName}`         
+      this.setState({
+        fullName: user
+      })
+    }
+  }
+
+
+  materialsNeeded = (course = this.state.course) => {
+    if (course.materialsNeeded !== undefined) {
+      let list = course.materialsNeeded
+                  .split('\n')
+                  .map((item, i) => 
+                    // `<li key=${i}>${item}</li>`
+                  React.createElement('li', {key: i}, item.replace('*', '')),
+                 )
+
+      this.setState({
+        materials: list
+      })
+    }
+  }
+
   render() {
-    console.log("yayayayayayyaya", this.state.course);
+
     return (
       <div>
         <div className="actions--bar">
           <div className="bounds" >
             <div className="grid-100">
               <span>
-                <a className="button" href={'course-detail/' + 'update-course'}>Update Course</a>
+                <a className="button" href={'course-detail/update-course'}>Update Course</a>
                 <a className="button" href="#">Delete Course</a>
               </span>
               <a className="button button-secondary" href="/">Return to List</a>
@@ -52,7 +87,7 @@ export default class CourseDetail extends Component {
             <div className="course--header">
               <h4 className="course--label">Course</h4>
               <h3 className="course--title">{this.state.course.title}</h3>
-              <p>By Joe Smith</p>
+              <p>By {this.state.fullName}</p>
             </div>
             <div className="course--description">
               {this.state.course.description}
@@ -68,16 +103,7 @@ export default class CourseDetail extends Component {
                 <li className="course--stats--list--item">
                   <h4>Materials Needed</h4>
                   <ul>
-                    <li>1/2 x 3/4 inch parting strip</li>
-                    <li>1 x 2 common pine</li>
-                    <li>1 x 4 common pine</li>
-                    <li>1 x 10 common pine</li>
-                    <li>1/4 inch thick lauan plywood</li>
-                    <li>Finishing Nails</li>
-                    <li>Sandpaper</li>
-                    <li>Wood Glue</li>
-                    <li>Wood Filler</li>
-                    <li>Minwax Oil Based Polyurethane</li>
+                    {this.state.materials}
                   </ul>
                 </li>
               </ul>
