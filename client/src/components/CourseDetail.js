@@ -18,7 +18,7 @@ export default class CourseDetail extends Component {
     this.apiSearch("courses/" + this.props.match.params.id);
   }
 
-  componentWillUpdate() {
+  UNSAFE_componentWillUpdate() {
     try {
       this.userCourseInfo();
       // this.materialsNeeded();
