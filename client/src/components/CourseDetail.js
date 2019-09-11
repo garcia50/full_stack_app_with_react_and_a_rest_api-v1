@@ -1,14 +1,9 @@
-// import React from 'react';
 import apiBaseUrl from '../config.js';
 import axios from 'axios';
-
-
 import React, { Component } from 'react';
 
 export default class CourseDetail extends Component {
-// const CourseDetail = (props) => {
- 
-  // let course;
+  //set state for app
   constructor() {
     super();
     this.state = {
@@ -35,8 +30,6 @@ export default class CourseDetail extends Component {
       console.log('Error fetching and parsing data', error);
     });
   }
-
-  // console.log('proporporporporrpp', course);
 
 
   render() {
@@ -91,12 +84,8 @@ export default class CourseDetail extends Component {
             </div>
           </div>
         </div>
-        
       </div>
     )
   }
 }
-
-// export default CourseDetail;
-
 
