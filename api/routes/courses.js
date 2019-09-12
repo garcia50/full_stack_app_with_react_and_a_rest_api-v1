@@ -101,7 +101,6 @@ router.put('/:id', authenticateUser, [
         if(course == null) {
           return res.status(400).json({ errors: 'That course does not exist' });
         } else {
-          console.log('courreeeeeeeeeeeeeee', req.body  );
           course.update(req.body)
           .then(
             res.status(204).json(course).end()
