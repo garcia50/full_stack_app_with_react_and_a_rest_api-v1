@@ -3,7 +3,6 @@ import Courses from './Courses'
 
 const Main = (props) => {
   const courses_data = props.data
-  const apiCall = props.search
 
   let courses;
 
@@ -18,7 +17,7 @@ const Main = (props) => {
   }
 
   return (
-    <div className="bounds" onLoad={apiCall()}>
+    <div className="bounds">
       {courses}
       <div className="grid-33">
         <a className="course--module course--add--module" href="courses/create">

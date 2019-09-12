@@ -20,6 +20,7 @@ import UserSignOut from './components/UserSignOut'
 import CourseDetail from './components/CourseDetail'
 import CreateCourse from './components/CreateCourse'
 import UpdateCourse from './components/UpdateCourse'
+import DeleteCourse from './components/DeleteCourse'
 import NotFound from './components/NotFound'
 
 const HeaderWithContext = withContext(Header);
@@ -30,6 +31,7 @@ const UserSignOutWithContext = withContext(UserSignOut);
 const CreateCourseWithContext = withContext(CreateCourse);
 const CourseDetailWithContext = withContext(CourseDetail);
 const UpdateCourseWithContext = withContext(UpdateCourse);
+const DeleteCourseWithContext = withContext(DeleteCourse);
 
 
 export default class App extends Component {
@@ -71,7 +73,7 @@ export default class App extends Component {
             
             <Switch>
               <Redirect exact from="/" to='/courses' />
-              <Route exact path="/courses" render={ () => <Main title="Main-Page" search={this.apiSearch} data={this.state.data} /> } /> 
+              <Route exact path="/courses" render={ () => <Main title="Main-Page" data={this.state.data} /> } /> 
               <PrivateRoute path="/authenticated" component={AuthWithContext} />
               <Route path="/signin" component={UserSignInWithContext} />
               <Route path="/signup" component={UserSignUpWithContext} />
@@ -79,6 +81,7 @@ export default class App extends Component {
               <PrivateRoute path="/courses/create" component={CreateCourseWithContext} />
               <Route exact path="/course-detail/:id/:course" component={CourseDetailWithContext} /> 
               <Route exact path="/course-detail/:id" component={UpdateCourseWithContext} /> 
+              <Route exact path="/delete-course/:id" component={DeleteCourseWithContext} /> 
               <Route component={NotFound} />
             </Switch>  
           </div> 

@@ -103,6 +103,7 @@ export default class CreateCourse extends Component {
         this.setState({ errors });
       } else {
         this.props.history.push('/');
+        window.location.reload();
       }
     })
     .catch((err) => {
