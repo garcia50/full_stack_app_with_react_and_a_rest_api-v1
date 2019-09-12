@@ -18,7 +18,7 @@ const Main = (props) => {
   }
 
   return (
-    <div className="bounds" onLoad={apiCall}>
+    <div className="bounds" onLoad={apiCall()}>
       {courses}
       <div className="grid-33">
         <a className="course--module course--add--module" href="courses/create">

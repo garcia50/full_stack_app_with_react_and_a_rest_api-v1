@@ -19,6 +19,7 @@ import UserSignUp from './components/UserSignUp'
 import UserSignOut from './components/UserSignOut'
 import CourseDetail from './components/CourseDetail'
 import CreateCourse from './components/CreateCourse'
+import UpdateCourse from './components/UpdateCourse'
 import NotFound from './components/NotFound'
 
 const HeaderWithContext = withContext(Header);
@@ -27,6 +28,8 @@ const UserSignUpWithContext = withContext(UserSignUp);
 const UserSignInWithContext = withContext(UserSignIn);
 const UserSignOutWithContext = withContext(UserSignOut);
 const CreateCourseWithContext = withContext(CreateCourse);
+const CourseDetailWithContext = withContext(CourseDetail);
+const UpdateCourseWithContext = withContext(UpdateCourse);
 
 
 export default class App extends Component {
@@ -74,7 +77,8 @@ export default class App extends Component {
               <Route path="/signup" component={UserSignUpWithContext} />
               <Route path="/signout" component={UserSignOutWithContext} />
               <PrivateRoute path="/courses/create" component={CreateCourseWithContext} />
-              <Route exact path="/course-detail/:id/:course" component={CourseDetail} /> 
+              <Route exact path="/course-detail/:id/:course" component={CourseDetailWithContext} /> 
+              <Route exact path="/course-detail/:id" component={UpdateCourseWithContext} /> 
               <Route component={NotFound} />
             </Switch>  
           </div> 

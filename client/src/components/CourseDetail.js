@@ -1,11 +1,13 @@
 import apiBaseUrl from '../config.js';
 import axios from 'axios';
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 
 export default class CourseDetail extends Component {
   //set state for app
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       course: [],
       materials: null,
@@ -18,16 +20,6 @@ export default class CourseDetail extends Component {
     this.apiSearch("courses/" + this.props.match.params.id);
   }
 
-  UNSAFE_componentWillUpdate() {
-    try {
-      this.userCourseInfo();
-      // this.materialsNeeded();
-    } catch (err) {
-      // throw Error(err)
-      // console.log('errrrrrrrr', err);
-    }
-  }
-
   apiSearch = (query = 'courses') => {
     axios.get(`${apiBaseUrl}/${query}`)
     .then(response => {
@@ -35,13 +27,13 @@ export default class CourseDetail extends Component {
       this.setState({
         course: response.data
       });
+      this.userCourseInfo();
     })
     .catch(error => {
       //throw an error to console for developer debugging purposes
       console.log('Error fetching and parsing data', error);
     });
   }
-
 
   userCourseInfo = (course = this.state.course) => {
     if (course.User !== undefined) {
@@ -53,10 +45,9 @@ export default class CourseDetail extends Component {
 
     if (course.materialsNeeded !== undefined) {
       let list = course.materialsNeeded
-                  .split('\n')
-                  .map((item, i) => 
-                    // `<li key=${i}>${item}</li>`
-                  React.createElement('li', {key: i}, item.replace('*', '')),
+                 .split('\n')
+                 .map((item, i) => 
+                   React.createElement('li', {key: i}, item.replace('*', '')),
                  )
       this.setState({
         materials: list
@@ -66,17 +57,26 @@ export default class CourseDetail extends Component {
 
 
   render() {
+    const { authUser } = this.props.context;
 
     return (
       <div>
         <div className="actions--bar">
           <div className="bounds" >
             <div className="grid-100">
-              <span>
-                <a className="button" href={'course-detail/update-course'}>Update Course</a>
-                <a className="button" href="#">Delete Course</a>
-              </span>
-              <a className="button button-secondary" href="/">Return to List</a>
+            {authUser ? (
+              <React.Fragment>
+                <span>
+                  <Link className="button" to={"/course-detail/"+this.state.course.id}>Update Course</Link>
+                  <Link className="button" to={"/delete-course/"+this.state.course.id}>Delete Course</Link>
+                  <Link className="button button-secondary" to="/">Return to List</Link>
+                </span>
+                </React.Fragment>
+            ) : (
+            <span>
+              <Link className="button button-secondary" to="/">Return to List</Link>
+            </span>
+            )}
               </div>
           </div>
         </div>
