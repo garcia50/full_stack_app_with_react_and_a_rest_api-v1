@@ -14,7 +14,19 @@ export default class DeleteCourse extends Component {
   }
 
   render() {
-    this.state.context(this.state.courseId, this.state.authUser)
+    this.props.context.data.deleteCourse(this.state.courseId, this.state.authUser)
+    .then( errors => {
+      if (errors.length) {
+        this.setState({ errors });
+      } else {
+        this.props.history.push('/');
+        window.location.reload();
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      this.props.history.push('/error');
+    });
     return (
       <Redirect to="/" />
     );
