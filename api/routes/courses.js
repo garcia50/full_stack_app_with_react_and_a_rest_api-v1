@@ -78,10 +78,10 @@ router.post('/', authenticateUser, [
 /* Updates course */
 router.put('/:id', authenticateUser, [
   check('title')
-    .exists()
+    .exists({ checkNull: true, checkFalsy: true })
     .withMessage('Please provide a value for "Title"'),
   check('description')
-    .exists()
+    .exists({ checkNull: true, checkFalsy: true })
     .withMessage('Please provide a value for "Description"')
   ],
   asyncHandler( async (req, res) => {
@@ -101,6 +101,7 @@ router.put('/:id', authenticateUser, [
         if(course == null) {
           return res.status(400).json({ errors: 'That course does not exist' });
         } else {
+          console.log('courreeeeeeeeeeeeeee', req.body  );
           course.update(req.body)
           .then(
             res.status(204).json(course).end()
