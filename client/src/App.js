@@ -79,15 +79,13 @@ export default class App extends Component {
               <Route path="/signup" component={UserSignUpWithContext} />
               <Route path="/signout" component={UserSignOutWithContext} />
               <PrivateRoute path="/courses/create" component={CreateCourseWithContext} />
-              <Route exact path="/course-detail/:id/:course" component={CourseDetailWithContext} /> 
-              <Route exact path="/course-detail/:id" component={UpdateCourseWithContext} /> 
-              <Route exact path="/delete-course/:id" component={DeleteCourseWithContext} /> 
+              <PrivateRoute path="/courses/:id/update" component={UpdateCourseWithContext} /> 
+              <Route path="/courses/:id/:course" component={CourseDetailWithContext} /> 
+              <Route path="/delete-course/:id" component={DeleteCourseWithContext} /> 
               <Route component={NotFound} />
             </Switch>  
           </div> 
       </BrowserRouter>
-              // <Route exact path="/" component={Public} />
-              // <Route exact path="/course-detail/:id/:course" render={ (props) => <CourseDetail {...props} title="Course-Detail" search={this.apiSearch("courses/" + props.match.params.id)} data={this.state.data}/> } /> 
     );
   }
 

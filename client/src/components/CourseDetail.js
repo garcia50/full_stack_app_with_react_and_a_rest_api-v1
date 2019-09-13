@@ -63,7 +63,7 @@ export default class CourseDetail extends Component {
       return (
         <React.Fragment>
           <span>
-            <Link className="button" to={"/course-detail/"+this.state.course.id}>Update Course</Link>
+            <Link className="button" to={"/courses/"+this.state.course.id+"/update"}>Update Course</Link>
             <Link className="button" to={"/delete-course/"+this.state.course.id}>Delete Course</Link>
             <Link className="button button-secondary" to="/">Return to List</Link>
           </span>
