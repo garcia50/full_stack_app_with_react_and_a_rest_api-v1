@@ -55,50 +55,37 @@ export default class CourseDetail extends Component {
     }
   }
 
-
-  render() {
+  displayButtons = () => {
     const { authUser } = this.props.context;
     const { authenticatedUser } = this.props.context;
 
+    if (authUser && (authenticatedUser.userId === this.state.course.userId)) {
+      return (
+        <React.Fragment>
+          <span>
+            <Link className="button" to={"/course-detail/"+this.state.course.id}>Update Course</Link>
+            <Link className="button" to={"/delete-course/"+this.state.course.id}>Delete Course</Link>
+            <Link className="button button-secondary" to="/">Return to List</Link>
+          </span>
+        </React.Fragment>
+      )
+    } else {
+      return (
+        <span>
+          <Link className="button button-secondary" to="/">Return to List</Link>
+        </span>
+      )
+    } 
+  }
+
+  render() {
     return (
       <div>
         <div className="actions--bar">
           <div className="bounds" >
             <div className="grid-100">
-            {
-              // if (authUser && (authenticatedUser.userId === this.state.course.userId)) {
-              //   <React.Fragment>
-              //     <span>
-              //       <Link className="button" to={"/course-detail/"+this.state.course.id}>Update Course</Link>
-              //       <Link className="button" to={"/delete-course/"+this.state.course.id}>Delete Course</Link>
-              //       <Link className="button button-secondary" to="/">Return to List</Link>
-              //     </span>
-              //   </React.Fragment>
-              // } else if (authUser) {
-              //   <span>
-              //     <Link className="button button-secondary" to="/">Return to List</Link>
-              //   </span>
-              // } else {
-              //   <span>
-              //     <Link className="button button-secondary" to="/">Return to List</Link>
-              //   </span>
-              // }
-
-              authUser ? (
-                <React.Fragment>
-                  <span>
-                    <Link className="button" to={"/course-detail/"+this.state.course.id}>Update Course</Link>
-                    <Link className="button" to={"/delete-course/"+this.state.course.id}>Delete Course</Link>
-                    <Link className="button button-secondary" to="/">Return to List</Link>
-                  </span>
-                </React.Fragment>
-              ) : (
-                <span>
-                  <Link className="button button-secondary" to="/">Return to List</Link>
-                </span>
-              )
-            }
-              </div>
+              { this.displayButtons() }
+            </div>
           </div>
         </div>
         <div className="bounds course--detail">
