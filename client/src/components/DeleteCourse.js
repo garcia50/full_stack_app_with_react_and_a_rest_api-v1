@@ -1,32 +1,44 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import apiBaseUrl from '../config.js';
 import { Redirect } from 'react-router-dom';
 
-// export default ({context}) => {
 export default class DeleteCourse extends Component {
-  //set state for app
-  constructor(props) {
-    super(props);
-    this.state = {
-      courseId: props.match.params.id,
-      authUser: props.context.authUser,
-      context: props.context.data.deleteCourse
-    };
+ 
+  componentDidMount() {
+    //run this function at initialization
+    this.apiSearch("courses/" + this.props.match.params.id);
+  }
+
+  apiSearch = (query = 'courses') => {
+    axios.get(`${apiBaseUrl}/${query}`)
+    .then(response => {
+      const authUserId = this.props.context.authenticatedUser.userId
+      const courseUserId = response.data.userId
+
+      if (authUserId === courseUserId) {
+        this.props.context.data.deleteCourse(response.data.id, this.props.context.authUser)
+        .then( errors => {
+          if (errors.length > 0) {
+            console.log(errors);
+          } else {
+            this.props.history.push('/');
+            window.location.reload();
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          this.props.history.push('/');
+        });
+      }
+    })
+    .catch(error => {
+      //throw an error to console for developer debugging purposes
+      console.log('Error fetching and parsing data', error);
+    });
   }
 
   render() {
-    this.props.context.data.deleteCourse(this.state.courseId, this.state.authUser)
-    .then( errors => {
-      if (errors.length) {
-        this.setState({ errors });
-      } else {
-        this.props.history.push('/');
-        window.location.reload();
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-      this.props.history.push('/error');
-    });
     return (
       <Redirect to="/" />
     );
