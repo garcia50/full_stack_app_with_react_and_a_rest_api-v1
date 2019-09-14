@@ -11,7 +11,7 @@ export default class CreateCourse extends Component {
   }
 
   render() {
-    const { authUser } = this.props.context;
+    const { authenticatedUser } = this.props.context;
     
     const {
       title,
@@ -36,7 +36,7 @@ export default class CreateCourse extends Component {
                   <div className="course--header">
                     <h4 className="course--label">Course</h4>
                     <div><input id="title" name="title" type="text" className="input-title course--title--input" onChange={this.change} placeholder="Course title..." value={title} /></div>
-                    <p>By {authUser.firstName} {authUser.lastName}</p>
+                    <p>By {authenticatedUser.firstName} {authenticatedUser.lastName}</p>
                   </div>
                   <div className="course--description">
                     <div><textarea id="description" name="description" className="" onChange={this.change} placeholder="Course description..." value={description}></textarea></div>
@@ -79,7 +79,7 @@ export default class CreateCourse extends Component {
   submit = () => {
     const { context } = this.props;
     const userId = context.authenticatedUser.userId;
-    const credentials = context.authUser;
+    const credentials = context.authUserPassword;
 
     const {
       title,

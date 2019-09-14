@@ -56,10 +56,10 @@ export default class CourseDetail extends Component {
   }
 
   displayButtons = () => {
-    const { authUser } = this.props.context;
+    const { authUserPassword } = this.props.context;
     const { authenticatedUser } = this.props.context;
 
-    if (authUser && (authenticatedUser.userId === this.state.course.userId)) {
+    if (authUserPassword && (authenticatedUser.userId === this.state.course.userId)) {
       return (
         <React.Fragment>
           <span>

@@ -1,5 +1,6 @@
+//import the config file to access api endpoint path
 import apiBaseUrl from './config.js';
-//import the libraries needed for this project
+//import the libraries needed for app
 import React, { Component } from 'react';
 import axios from 'axios';
 import {
@@ -8,7 +9,7 @@ import {
   Route,
   Redirect
 } from 'react-router-dom';
-
+//import components 
 import Header from './components/Header';
 import Main from './components/Index'
 import withContext from './Context';
@@ -22,7 +23,7 @@ import CreateCourse from './components/CreateCourse'
 import UpdateCourse from './components/UpdateCourse'
 import DeleteCourse from './components/DeleteCourse'
 import NotFound from './components/NotFound'
-
+//import components through context to dynamically access context contents 
 const HeaderWithContext = withContext(Header);
 const AuthWithContext = withContext(Authenticated);
 const UserSignUpWithContext = withContext(UserSignUp);
@@ -69,8 +70,7 @@ export default class App extends Component {
       //Add routes
       <BrowserRouter>
           <div>
-          <HeaderWithContext />
-            
+            <HeaderWithContext />
             <Switch>
               <Redirect exact from="/" to='/courses' />
               <Route exact path="/courses" render={ () => <Main title="Main-Page" data={this.state.data} /> } /> 
@@ -88,5 +88,4 @@ export default class App extends Component {
       </BrowserRouter>
     );
   }
-
 }

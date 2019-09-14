@@ -1,26 +1,30 @@
+//import the libraries needed for context
 import React, { Component } from 'react';
 import Cookies from 'js-cookie';
 import Data from './Data';
-
+//Context allows us to dynamically pass data through coponents 
 const Context = React.createContext(); 
 
 export class Provider extends Component {
   state = {
     authenticatedUser: Cookies.getJSON('authenticatedUser') || null,
-    authUser: Cookies.getJSON('authUser') || null
+    authUserPassword: Cookies.getJSON('authUserPassword') || null
   };
 
   constructor() {
+    //set state for context
     super();
     this.data = new Data();
   }
 
   render() {
+    //set/obtain authuser through cookies 
     const { authenticatedUser } = this.state;
-    const { authUser } = this.state;
+    const { authUserPassword } = this.state;
+
     const value = {
       authenticatedUser,
-      authUser,
+      authUserPassword,
       data: this.data,
       actions: {
         signIn: this.signIn,
@@ -36,29 +40,29 @@ export class Provider extends Component {
   
   signIn = async (emailAddress, password) => {
     const encodedCredentials = btoa(`${emailAddress}:${password}`);
-    this.setState({authUser: encodedCredentials})
+    this.setState({authUserPassword: encodedCredentials})
 
     const user = await this.data.getUser(encodedCredentials);
     if (user !== null) {
       this.setState(() => {
         return {
           authenticatedUser: user,
-          authUser: encodedCredentials
+          authUserPassword: encodedCredentials
         };
       });
       const cookieOptions = {
         expires: 1 // 1 day
       };
       Cookies.set('authenticatedUser', JSON.stringify(user), cookieOptions);
-      Cookies.set('authUser', JSON.stringify(encodedCredentials), cookieOptions);
+      Cookies.set('authUserPassword', JSON.stringify(encodedCredentials), cookieOptions);
     }
     return user;
   }
 
   signOut = () => {
-    this.setState({ authenticatedUser: null, authUser: null });
+    this.setState({ authenticatedUser: null, authUserPassword: null });
     Cookies.remove('authenticatedUser');
-    Cookies.remove('authUser');
+    Cookies.remove('authUserPassword');
   }
 }
 

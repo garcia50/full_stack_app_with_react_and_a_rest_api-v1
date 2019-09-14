@@ -41,7 +41,7 @@ export default class UpdateCourse extends Component {
 
 
   render() {
-    const { authUser } = this.props.context;
+    const { authenticatedUser } = this.props.context;
 
     const {
       title,
@@ -66,7 +66,7 @@ export default class UpdateCourse extends Component {
                   <div className="course--header">
                     <h4 className="course--label">Course</h4>
                     <div><input id="title" name="title" type="text" className="input-title course--title--input" onChange={this.change} placeholder={title} value={title} /></div>
-                    <p>By {authUser.firstName} {authUser.lastName}</p>
+                    <p>By {authenticatedUser.firstName} {authenticatedUser.lastName}</p>
                   </div>
                   <div className="course--description">
                     <div><textarea id="description" name="description" className="" onChange={this.change} placeholder={description} value={description}></textarea></div>
@@ -127,7 +127,7 @@ export default class UpdateCourse extends Component {
     };
 
     const courseId = this.state.course.id
-    const credentials = context.authUser;
+    const credentials = context.authUserPassword;
 
     context.data.updateCourse(course, courseId, credentials)
     .then( errors => {

@@ -17,7 +17,7 @@ export default class DeleteCourse extends Component {
       const courseUserId = response.data.userId
 
       if (authUserId === courseUserId) {
-        this.props.context.data.deleteCourse(response.data.id, this.props.context.authUser)
+        this.props.context.data.deleteCourse(response.data.id, this.props.context.authUserPassword)
         .then( errors => {
           if (errors.length > 0) {
             console.log(errors);
