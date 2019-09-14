@@ -1,11 +1,14 @@
+//import libraries 
 import React, { Component } from 'react';
 import apiBaseUrl from '../config.js';
 import Form from './Form';
 import axios from 'axios';
+//Use slugify library for better UX
 var slugify = require('slugify')
 
 
 export default class UpdateCourse extends Component {
+  //Set initial state for UpdateCourse 
   state = {
     course: [],
     title: '',
@@ -23,7 +26,7 @@ export default class UpdateCourse extends Component {
   apiSearch = (query = 'courses') => {
     axios.get(`${apiBaseUrl}/${query}`)
     .then(response => {
-      //set data to imgs state
+      //set data to UpdateCourse state
       this.setState({
         course: response.data,
         title: response.data.title,
@@ -42,7 +45,7 @@ export default class UpdateCourse extends Component {
 
   render() {
     const { authenticatedUser } = this.props.context;
-
+    //Set state for UpdateCourse 
     const {
       title,
       description,
@@ -94,7 +97,7 @@ export default class UpdateCourse extends Component {
       </div>
     )
   }
-
+  //sets course input to state variables 
   change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -117,7 +120,7 @@ export default class UpdateCourse extends Component {
       materialsNeeded
     } = this.state;
 
-    // Update course
+    // Update course variable(instance)
     const course = {
       userId,
       title,
@@ -128,7 +131,7 @@ export default class UpdateCourse extends Component {
 
     const courseId = this.state.course.id
     const credentials = context.authUserPassword;
-
+    //calls updateCourse function with given course data and credentials
     context.data.updateCourse(course, courseId, credentials)
     .then( errors => {
       if (errors.length) {
@@ -142,7 +145,7 @@ export default class UpdateCourse extends Component {
       this.props.history.push('/error');
     });
   }
-
+  //sends user back to previous path
   cancel = () => {
     this.props.history.push(`${this.state.course.id}/${slugify(this.state.course.title, '_')}`);
   }

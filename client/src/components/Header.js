@@ -1,7 +1,9 @@
+//import libraries
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default class Header extends React.PureComponent {
+  //sets header info
   render() {
     const { context } = this.props;
     const authUser = context.authenticatedUser;
@@ -13,11 +15,13 @@ export default class Header extends React.PureComponent {
           </Link>
           <nav>
             {authUser ? (
+              //Authenticated user present
               <React.Fragment>
                 <span>Welcome, {authUser.firstName} {authUser.lastName}!</span>
                 <Link to="/signout">Sign Out</Link>
               </React.Fragment>
             ) : (
+              //Authenticated user not present
               <React.Fragment>
                 <Link className="signup" to="/signup">Sign Up</Link>
                 <Link className="signin" to="/signin">Sign In</Link>

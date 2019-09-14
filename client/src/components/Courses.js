@@ -1,5 +1,6 @@
 //import the libraries
 import React from 'react';
+//use slugify to display course name on url
 var slugify = require('slugify')
 
 const Courses = ({ id, title }) => {

@@ -6,6 +6,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
+  //Pass data through context.provider/place in higher order. Allow App to have access to context data
   <Provider> 
     <App />
   </Provider>, 

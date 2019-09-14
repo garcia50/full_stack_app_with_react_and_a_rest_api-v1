@@ -6,10 +6,10 @@ import { Redirect } from 'react-router-dom';
 export default class DeleteCourse extends Component {
  
   componentDidMount() {
-    //run this function at initialization
+    //runs function at initialization
     this.apiSearch("courses/" + this.props.match.params.id);
   }
-
+  //api call to deleteCourse function 
   apiSearch = (query = 'courses') => {
     axios.get(`${apiBaseUrl}/${query}`)
     .then(response => {

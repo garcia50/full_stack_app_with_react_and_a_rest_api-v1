@@ -1,6 +1,8 @@
+//import libraries
 import React from 'react';
 
 export default (props) => {
+  //dynamically set constants from given props
   const {
     cancel,
     errors,
@@ -8,12 +10,12 @@ export default (props) => {
     submitButtonText,
     elements,
   } = props;
-
+  //dynamically pass submit function 
   function handleSubmit(event) {
     event.preventDefault();
     submit();
   }
-
+  //dynamically pass cancel function
   function handleCancel(event) {
     event.preventDefault();
     cancel();
@@ -32,7 +34,7 @@ export default (props) => {
     </div>
   );
 }
-
+//dynamically pass and set erros
 function ErrorsDisplay({ errors }) {
   let errorsDisplay = null;
 

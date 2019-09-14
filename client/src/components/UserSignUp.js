@@ -1,9 +1,11 @@
+//import libraries 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Form from './Form';
 import PasswordMask from 'react-password-mask';
 
 export default class UserSignUp extends Component {
+  //sets state
   state = {
     firstName: '',
     lastName: '',
@@ -14,6 +16,7 @@ export default class UserSignUp extends Component {
   }
 
   render() {
+    //Set state for UserSignUp 
     const {
       firstName,
       lastName,
@@ -49,7 +52,7 @@ export default class UserSignUp extends Component {
       </div>
     );
   }
-
+  //sets user input to state variables 
   change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -60,7 +63,7 @@ export default class UserSignUp extends Component {
       };
     });
   }
-
+  //submits user input
   submit = () => {
     const { context } = this.props;
     const {
@@ -79,7 +82,7 @@ export default class UserSignUp extends Component {
       })
       return;
     } else {
-      // Create user
+    // Create course variable(instance)
       user = {
         firstName,
         lastName,
@@ -88,7 +91,7 @@ export default class UserSignUp extends Component {
       };
     }
 
-
+    //calls createUser function with given user data and credentials
     context.data.createUser(user)
     .then( errors => {
       if (errors.length) {
@@ -101,11 +104,12 @@ export default class UserSignUp extends Component {
       }
     })
     .catch((err) => {
+      //throw an error to console for developer debugging purposes
       console.log(err);
       this.props.history.push('/error');
     });
   }
-
+  //sends user back to index (home)
   cancel = () => {
     this.props.history.push('/');
   }

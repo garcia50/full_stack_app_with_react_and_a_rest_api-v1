@@ -1,3 +1,4 @@
+//import libraries
 import apiBaseUrl from '../config.js';
 import axios from 'axios';
 import React, { Component } from 'react';
@@ -27,6 +28,7 @@ export default class CourseDetail extends Component {
       this.setState({
         course: response.data
       });
+      //call userCourseInfo function after api call
       this.userCourseInfo();
     })
     .catch(error => {
@@ -34,31 +36,31 @@ export default class CourseDetail extends Component {
       console.log('Error fetching and parsing data', error);
     });
   }
-
+  //calls api and retieve user info
   userCourseInfo = (course = this.state.course) => {
     if (course.User !== undefined) {
-      let user = `${course.User.firstName} ${course.User.lastName}`         
+      let userFullname = `${course.User.firstName} ${course.User.lastName}`         
       this.setState({
-        fullName: user
+        fullName: userFullname
       })
     }
-
+    //mapping through course materials and creating li elements
     if (course.materialsNeeded !== undefined) {
-      let list = course.materialsNeeded
+      let materialList = course.materialsNeeded
                  .split('\n')
                  .map((item, i) => 
                    React.createElement('li', {key: i}, item.replace('*', '')),
                  )
       this.setState({
-        materials: list
+        materials: materialList
       })
     }
   }
-
+  //displays create and delete buttons if authenticated user exist
   displayButtons = () => {
     const { authUserPassword } = this.props.context;
     const { authenticatedUser } = this.props.context;
-
+    //if statement to display buttons
     if (authUserPassword && (authenticatedUser.userId === this.state.course.userId)) {
       return (
         <React.Fragment>

@@ -1,7 +1,9 @@
+//import libraries 
 import React, { Component } from 'react';
 import Form from './Form';
 
 export default class CreateCourse extends Component {
+  //sets state
   state = {
     title: '',
     description: '',
@@ -12,7 +14,7 @@ export default class CreateCourse extends Component {
 
   render() {
     const { authenticatedUser } = this.props.context;
-    
+    //Set state for CreateCourse 
     const {
       title,
       description,
@@ -64,7 +66,7 @@ export default class CreateCourse extends Component {
       </div>
     );
   } 
-
+  //sets course input to state variables 
   change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -75,7 +77,7 @@ export default class CreateCourse extends Component {
       };
     });
   }
-
+  //submits user input
   submit = () => {
     const { context } = this.props;
     const userId = context.authenticatedUser.userId;
@@ -88,7 +90,7 @@ export default class CreateCourse extends Component {
       materialsNeeded
     } = this.state;
 
-    // Create course
+    // Create course variable(instance)
     const course = {
       userId,
       title,
@@ -96,7 +98,7 @@ export default class CreateCourse extends Component {
       estimatedTime,
       materialsNeeded
     };
-
+    //calls createCourse function with given course data and credentials
     context.data.createCourse(course, credentials)
     .then( errors => {
       if (errors.length) {
@@ -107,11 +109,12 @@ export default class CreateCourse extends Component {
       }
     })
     .catch((err) => {
+      //throw an error to console for developer debugging purposes
       console.log(err);
       this.props.history.push('/error');
     });
   }
-
+  //sends user back to index (home)
   cancel = () => {
    this.props.history.push('/');
   }

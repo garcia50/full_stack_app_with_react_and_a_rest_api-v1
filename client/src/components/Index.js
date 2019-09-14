@@ -2,10 +2,11 @@ import React from 'react';
 import Courses from './Courses'
 
 const Main = (props) => {
+  //set variable with data from App/Browser Router
   const courses_data = props.data
 
   let courses;
-
+  //maps through courses then passes data to Courses component
   if (courses_data.length > 0) {
     courses = courses_data.map(course => 
       <Courses
@@ -17,6 +18,7 @@ const Main = (props) => {
   }
 
   return (
+    //Displays courses onto page
     <div className="bounds">
       {courses}
       <div className="grid-33">

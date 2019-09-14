@@ -1,8 +1,10 @@
+//import libraries 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Form from './Form';
 
 export default class UserSignIn extends Component {
+  //Set initial state for UserSignIn 
   state = {
     username: '',
     password: '',
@@ -37,7 +39,7 @@ export default class UserSignIn extends Component {
       </div>
     );
   }
-
+  //sets user input to state variables 
   change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -48,12 +50,12 @@ export default class UserSignIn extends Component {
       };
     });
   }
-
+  //submits user input. 
   submit = () => {
     const { context } = this.props;
     const { from } = this.props.location.state || { from: { pathname: '/authenticated' } };
     const { username, password } = this.state;
-
+    //calls SignIn function with given user data and credentials
     context.actions.signIn(username, password)
     .then((user) => {
       if (user === null) {
@@ -69,7 +71,7 @@ export default class UserSignIn extends Component {
       this.props.history.push('/error');
     });
   }
-
+  //sends user back to index (home)
   cancel = () => {
     this.props.history.push('/');
   }

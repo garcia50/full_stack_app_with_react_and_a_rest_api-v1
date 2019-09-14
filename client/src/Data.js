@@ -1,6 +1,9 @@
+//import the config file to access api endpoint path
 import apiBaseUrl from './config';
-
+//Data class/"helper class"
+//Asynchronous functions that calls the api and retrieve data
 export default class Data {
+  //Passing data to api
   api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
     const url = apiBaseUrl + path;
 
@@ -10,11 +13,11 @@ export default class Data {
         'Content-Type': 'application/json; charset=utf-8',
       },
     };
-
+    //Passing body-data to option hash object
     if (body !== null) {
       options.body = JSON.stringify(body);
     }
-
+    //Passing credentials-data to option hash object
     if (requiresAuth) {    
       options.headers['Authorization'] = `Basic ${credentials}`;
     }

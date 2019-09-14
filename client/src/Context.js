@@ -18,10 +18,9 @@ export class Provider extends Component {
   }
 
   render() {
-    //set/obtain authuser through cookies 
+    //set/obtain authuser & data for cookies as well as data file objects 
     const { authenticatedUser } = this.state;
     const { authUserPassword } = this.state;
-
     const value = {
       authenticatedUser,
       authUserPassword,
@@ -31,17 +30,18 @@ export class Provider extends Component {
         signOut: this.signOut
       }
     };
+    //Pass data through context/place in higher order. Allow App to have access to context data
     return (
       <Context.Provider value={value}>
         {this.props.children}
       </Context.Provider>  
     );
   }
-  
+  //Authenticate user with given credentials 
   signIn = async (emailAddress, password) => {
     const encodedCredentials = btoa(`${emailAddress}:${password}`);
     this.setState({authUserPassword: encodedCredentials})
-
+    //Api call - retrieves user
     const user = await this.data.getUser(encodedCredentials);
     if (user !== null) {
       this.setState(() => {
@@ -58,7 +58,7 @@ export class Provider extends Component {
     }
     return user;
   }
-
+  //Remove and reset cookies to null(original state)
   signOut = () => {
     this.setState({ authenticatedUser: null, authUserPassword: null });
     Cookies.remove('authenticatedUser');
@@ -77,6 +77,7 @@ export const Consumer = Context.Consumer;
 export default function withContext(Component) {
   return function ContextComponent(props) {
     return (
+      //Setting/placing context consumer in a higher order than app to dynamically pass data through app itself
       <Context.Consumer>
         {context => <Component {...props} context={context} />}
       </Context.Consumer>
