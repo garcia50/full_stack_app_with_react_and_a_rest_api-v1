@@ -1,8 +1,6 @@
 ## Full Stack App with React & Rest API
 
-**Welcome users!**
-
-This app was created using the React library to create an image gallery. 
+**Welcome users!** 
 
 Some of the stack includes: 
   - JavaScript
