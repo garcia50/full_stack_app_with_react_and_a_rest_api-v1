@@ -2,13 +2,16 @@
 
 **Welcome users!** 
 
+### About this app:
+Uses React to create a client for an existing school database REST API. This full stack JavaScript application allows users to view a list of courses and the detail for a specific course, sign up to create an account or sign in with an existing account, and create, update, or delete courses. Incorporating authentication technology to provide a more secure and dynamic user experience. 
+
 Some of the stack includes: 
   - JavaScript
   - React 
   - JSX
   - Axios
 
-In the project directory, you can run:
+In both the client and api project directories, you can run:
 
 ### `npm start`
 
