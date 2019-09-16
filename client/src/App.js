@@ -1,17 +1,15 @@
-//import the config file to access api endpoint path
-import apiBaseUrl from './config.js';
 //import the libraries needed for app
 import React, { Component } from 'react';
-import axios from 'axios';
 import {
   BrowserRouter,
   Switch,
   Route,
   Redirect
 } from 'react-router-dom';
+
 //import components 
 import Header from './components/Header';
-import Main from './components/Index'
+import Courses from './components/Courses'
 import withContext from './Context';
 import PrivateRoute from './PrivateRoute';
 import Authenticated from './components/Authenticated'
@@ -23,6 +21,7 @@ import CreateCourse from './components/CreateCourse'
 import UpdateCourse from './components/UpdateCourse'
 import DeleteCourse from './components/DeleteCourse'
 import NotFound from './components/NotFound'
+
 //import components through context to dynamically access context contents 
 const HeaderWithContext = withContext(Header);
 const AuthWithContext = withContext(Authenticated);
@@ -36,35 +35,6 @@ const DeleteCourseWithContext = withContext(DeleteCourse);
 
 
 export default class App extends Component {
-  //set state for app
-  constructor() {
-    super();
-    this.state = {
-      data: []
-    };
-  }
-
-  componentDidMount() {
-    //run this function at initialization
-    this.apiSearch();
-  }
-
-  //obtain data using axios 
-  apiSearch = (query = 'courses', istrue = false) => {
-    // console.log('queeeryryryryryry', query);
-    axios.get(`${apiBaseUrl}/${query}`)
-    .then(response => {
-      this.setState({
-        //set data to imgs state
-        data: response.data
-      });
-    })
-    .catch(error => {
-      //throw an error to console for developer debugging purposes
-      console.log('Error fetching and parsing data', error);
-    });
-  }
-
   render() {
     return (
       //Add routes
@@ -73,7 +43,7 @@ export default class App extends Component {
             <HeaderWithContext />
             <Switch>
               <Redirect exact from="/" to='/courses' />
-              <Route exact path="/courses" render={ () => <Main title="Main-Page" data={this.state.data} /> } /> 
+              <Route exact path="/courses" component={Courses} /> } /> 
               <PrivateRoute path="/authenticated" component={AuthWithContext} />
               <Route path="/signin" component={UserSignInWithContext} />
               <Route path="/signup" component={UserSignUpWithContext} />
