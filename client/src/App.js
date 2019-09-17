@@ -40,7 +40,7 @@ export default class App extends Component {
       //Add routes
       <BrowserRouter>
           <div>
-            <HeaderWithContext />
+            <Route render={({location})=> <HeaderWithContext location={location.pathname} />} />
             <Switch>
               <Redirect exact from="/" to='/courses' />
               <Route exact path="/courses" component={Courses} /> } /> 
@@ -50,7 +50,7 @@ export default class App extends Component {
               <Route path="/signout" component={UserSignOutWithContext} />
               <PrivateRoute path="/courses/create" component={CreateCourseWithContext} />
               <PrivateRoute path="/courses/:id/update" component={UpdateCourseWithContext} /> 
-              <Route path="/courses/:id/:course" component={CourseDetailWithContext} /> 
+              <Route path="/courses/:id" component={CourseDetailWithContext} /> 
               <Route path="/delete-course/:id" component={DeleteCourseWithContext} /> 
               <Route component={NotFound} />
             </Switch>  

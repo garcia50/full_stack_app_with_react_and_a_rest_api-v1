@@ -3,6 +3,7 @@ import apiBaseUrl from '../config.js';
 import axios from 'axios';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import ReactMarkdown from "react-markdown";
 
 
 export default class CourseDetail extends Component {
@@ -81,6 +82,11 @@ export default class CourseDetail extends Component {
   }
 
   render() {
+    const courseDescription = this.state.course.description;
+    console.log('11111', this.state.course.description);
+
+    const courseMaterials = this.state.materials
+    console.log('22222', this.state.materials);
     return (
       <div>
         <div className="actions--bar">
@@ -98,7 +104,7 @@ export default class CourseDetail extends Component {
               <p>By {this.state.fullName}</p>
             </div>
             <div className="course--description">
-              {this.state.course.description}
+              <ReactMarkdown source={courseDescription} />
             </div>
           </div>
           <div className="grid-25 grid-right">
@@ -111,7 +117,7 @@ export default class CourseDetail extends Component {
                 <li className="course--stats--list--item">
                   <h4>Materials Needed</h4>
                   <ul>
-                    {this.state.materials}
+                    <ReactMarkdown source={this.state.course.materialsNeeded} />
                   </ul>
                 </li>
               </ul>
