@@ -83,10 +83,8 @@ export default class CourseDetail extends Component {
 
   render() {
     const courseDescription = this.state.course.description;
-    console.log('11111', this.state.course.description);
-
     const courseMaterials = this.state.materials
-    console.log('22222', this.state.materials);
+
     return (
       <div>
         <div className="actions--bar">
