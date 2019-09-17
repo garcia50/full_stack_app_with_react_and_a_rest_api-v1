@@ -49,7 +49,6 @@ export default class Courses extends Component {
       //set data to app state
       courses: allCourses
     });
-    console.log('hey', allCourses );
   }
 
 
