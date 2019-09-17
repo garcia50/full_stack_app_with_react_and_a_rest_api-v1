@@ -82,9 +82,6 @@ export default class CourseDetail extends Component {
   }
 
   render() {
-    const courseDescription = this.state.course.description;
-    const courseMaterials = this.state.materials
-
     return (
       <div>
         <div className="actions--bar">
@@ -102,7 +99,7 @@ export default class CourseDetail extends Component {
               <p>By {this.state.fullName}</p>
             </div>
             <div className="course--description">
-              <ReactMarkdown source={courseDescription} />
+              <ReactMarkdown source={this.state.course.description} />
             </div>
           </div>
           <div className="grid-25 grid-right">
