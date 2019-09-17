@@ -12,7 +12,6 @@ export default class CourseDetail extends Component {
     super(props);
     this.state = {
       course: [],
-      materials: null,
       fullName: ''
     };
   }
@@ -43,17 +42,6 @@ export default class CourseDetail extends Component {
       let userFullname = `${course.User.firstName} ${course.User.lastName}`         
       this.setState({
         fullName: userFullname
-      })
-    }
-    //mapping through course materials and creating li elements
-    if (course.materialsNeeded !== undefined) {
-      let materialList = course.materialsNeeded
-                 .split('\n')
-                 .map((item, i) => 
-                   React.createElement('li', {key: i}, item.replace('*', '')),
-                 )
-      this.setState({
-        materials: materialList
       })
     }
   }
